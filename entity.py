@@ -1,33 +1,17 @@
-from typing import Set, Iterable, Any
+from typing import Tuple
 
-from tcod.context import Context
-from tcod.console import Console
-
-from entity import Entity
-from game_map import GameMap
-from input_handlers import EventHandler
-
-class Engine:
-    def __init__(self, entities: Set[Entity], event_handler: EventHandler, game_map: GameMap, player: Entity):
-        self.entities = entities
-        self.event_handler = event_handler
-        self.game_map = game_map
-        self.player = player
+class Entity:
+    """
+    A generic object to represent player, enemies, items, etc.
+    """
+    def __init__(self, x: int, y: int, char: str, color: Tuple[int, int, int]):
+        self.x = x
+        self.y = y
+        self.char = char
+        self.color = color
         
-    def handle_events(self, events: Iterable[Any]) -> None:
-        for event in events:
-            action = self.event_handler.dispatch(event)
-        
-            if action is None: 
-                continue
-        
-            action.perform(self, self.player) 
-        
-    def render(self, console: Console, context: Context) -> None:
-        self.game_map.render(console)
-        for entity in self.entities:
-            console.print(entity.x, entity.y, entity.char, fg=entity.color)
-            
-        context.present(console)
-        console.clear()
+    def move(self, dx: int, dy: int) -> None:
+            # Moves the entity a given amount
+            self.x += dx
+            self.y += dy
         

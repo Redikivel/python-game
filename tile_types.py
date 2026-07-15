@@ -27,8 +27,8 @@ def new_tile(
         return np.array((walkable, transparent, dark), dtype=tile_dt)
     
 floor = new_tile(
-    walkable=True, transparent=True, dark=(ord('.'), (225, 225, 225), (50, 50, 150)),
+    walkable=True, transparent=True, dark=(ord(' '), (186, 147, 7), (186, 147, 7)),
     )
 wall = new_tile(
-    walkable=False, transparent=False, dark=(ord('#'), (225, 225, 225), (0, 0, 100)),
+    walkable=False, transparent=False, dark=(ord(' '), (7, 59, 66), (7, 59, 66)),
     )
